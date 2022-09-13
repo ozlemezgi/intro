@@ -6,11 +6,11 @@ export default class CatagoryList extends Component {
     super(props);
     state:{}
   }
-  
+
   render() {
     return (
       <div>
-        <h3>{this.props.title}</h3> 
+        <h3>{this.props.info.title}</h3> 
         {/* süslü parantez js kodu başlatmak için kullanılır */}
         <ListGroup>
           <ListGroupItem>item 1</ListGroupItem>

@@ -8,8 +8,8 @@ import {Container ,Row ,Col} from "reactstrap";
 
 
 function App() {
-  let titleProduct ="Product List" //bu da bir başka yazım şekli
-  
+  let productInfo ={title:"Product List"} //bu da bir başka yazım şekli
+  let categoryInfo ={title:"CatagoryList"}
   return (
     // jsx yapısı ; 
     <div>
@@ -20,8 +20,8 @@ function App() {
         </Row>
 
         <Row>
-          <Col xs ="3"><CatagoryList title="Category List"></CatagoryList></Col>
-          <Col xs ="9"> <ProductList title={titleProduct}></ProductList></Col> 
+          <Col xs ="3"><CatagoryList info={categoryInfo}></CatagoryList></Col>
+          <Col xs ="9"> <ProductList info={productInfo}></ProductList></Col> 
         </Row>
 
       </Container>
