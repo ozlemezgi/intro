@@ -8,15 +8,14 @@ export default class CatagoryList extends Component {
       { categoryId: 2, categoryName: "Condiments" },
     ],
 
-    currentCategory: ""
+    
   }
 
   //state bir componentin datasıdır
   //props bir componentten ötekine taşınan data yada eventtir.
 
-  changeCategory = category => {
-    this.setState({ currentCategory: category.categoryName });
-  } //bu bir fonksiyondur 
+ 
+
   render() {
     return (
       <div>
@@ -26,12 +25,12 @@ export default class CatagoryList extends Component {
         <ListGroup>
           {
             this.state.categories.map(category => (
-              <ListGroupItem onClick={() => this.changeCategory(category)} key={category.categoryId}>{category.categoryName}</ListGroupItem>
+              <ListGroupItem onClick={() => this.props.changeCategory(category)} key={category.categoryId}>{category.categoryName}</ListGroupItem>
             ))
             //setstate statedeki herhangi bir nesnenin eğiştirlmesini sağlar
           }
         </ListGroup>
-        <h4>{this.state.currentCategory}</h4>
+        <h4>{this.props.currentCategory}</h4>
       </div>
     )
   }

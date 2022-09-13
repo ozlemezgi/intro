@@ -1,36 +1,47 @@
-import React from 'react';
+
 import CatagoryList from './CatagoryList';
 import Navi from './Navi';
 import ProductList from './ProductList';
 import "bootstrap/dist/css/bootstrap.min.css"
+import React, { Component } from 'react'
 //import { Container, Row } from 'react-bootstrap';
-import {Container ,Row ,Col} from "reactstrap";
+import { Container, Row, Col } from "reactstrap";
 
 
-function App() {
-  let productInfo ={title:"Product List"} //bu da bir başka yazım şekli
-  let categoryInfo ={title:"CatagoryList"}
-  return (
-    // jsx yapısı ; 
-    <div>
-      <Container>
+export default class App extends Component {
 
-        <Row> 
-        <Navi> </Navi>
-        </Row>
+  state ={currentCategory:""}
 
-        <Row>
-          <Col xs ="3"><CatagoryList info={categoryInfo}></CatagoryList></Col>
-          <Col xs ="9"> <ProductList info={productInfo}></ProductList></Col> 
-        </Row>
+  changeCategory = (category) => {
+    this.setState({ currentCategory: category.categoryName });
+  } //bu bir fonksiyondur 
 
-      </Container>
-      {/* <h2>Hello from react </h2>
+  render() {
+    let productInfo = { title: "Product List" } ;//bu da bir başka yazım şekli
+    let categoryInfo = { title: "CatagoryList" };
+    return (
+      // jsx yapısı ; 
+      <div>
+        <Container>
+
+          <Row>
+            <Navi> </Navi>
+          </Row>
+
+          <Row>
+            <Col xs="3"><CatagoryList currentCategory={this.state.currentCategory} changeCategory={this.changeCategory} info={categoryInfo}></CatagoryList></Col>
+            <Col xs="9"> <ProductList currentCategory={this.state.currentCategory} info={productInfo}></ProductList></Col>
+          </Row>
+
+        </Container>
+        {/* <h2>Hello from react </h2>
       <h3>Deneme</h3>  */}
 
-    </div>
-    // <h3>Deneme</h3> //jsx kurallarına aykırı aynı hiyararşide iki ana component oluşturamazsın
-  );
+      </div>
+      // <h3>Deneme</h3> //jsx kurallarına aykırı aynı hiyararşide iki ana component oluşturamazsın
+    );
+
+  }
 }
 
-export default App;
+
