@@ -3,19 +3,21 @@ import { ListGroup, ListGroupItem } from 'reactstrap'
 
 export default class CatagoryList extends Component {
   state = {
-    categories: [
-      { categoryId: 1, categoryName: "Beverages" },
-      { categoryId: 2, categoryName: "Condiments" },
-    ],
-
-    
+    categories: []
   }
 
   //state bir componentin datasıdır
   //props bir componentten ötekine taşınan data yada eventtir.
 
- 
+  componentDidMount(){ //component yerleşti
+    this.getCategories();
+  }
 
+  getCategories = ()=>{
+    fetch("http://localhost:3000/categories") //fetch ile bir api ye ulaşılabilir.
+    .then(response=>response.json()) //gelen response için response u json a döndür.
+    .then(data=>this.setState({categories:data}));;
+  }
   render() {
     return (
       <div>
@@ -25,7 +27,7 @@ export default class CatagoryList extends Component {
         <ListGroup>
           {
             this.state.categories.map(category => (
-              <ListGroupItem onClick={() => this.props.changeCategory(category)} key={category.categoryId}>{category.categoryName}</ListGroupItem>
+              <ListGroupItem onClick={() => this.props.changeCategory(category)} key={category.id}>{category.categoryName}</ListGroupItem>
             ))
             //setstate statedeki herhangi bir nesnenin eğiştirlmesini sağlar
           }
