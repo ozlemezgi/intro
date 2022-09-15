@@ -6,28 +6,43 @@ import "bootstrap/dist/css/bootstrap.min.css"
 import React, { Component } from 'react'
 //import { Container, Row } from 'react-bootstrap';
 import { Container, Row, Col } from "reactstrap";
+import { toHaveDisplayValue } from '@testing-library/jest-dom/dist/matchers';
 
 
 export default class App extends Component {
 
-  state ={currentCategory:"" ,products :[]}
+  state = { currentCategory: "", products: [] }
 
-  componentDidMount(){ //component yerleşti
+  componentDidMount() { //component yerleşti
     this.getProducts();
   }
 
   changeCategory = (category) => {
     this.setState({ currentCategory: category.categoryName });
+    // console.log(category)
+    this.getProducts(category.id);
+    //changeCategory i çağırınca;
+    //getProducs çağır
+    //getProducs çağırlınca product state değişiyor
+    //bu state'i product list kullandığı için yeniden render ediliyor..
   } //bu bir fonksiyondur 
 
-  getProducts = ()=>{
-    fetch("http://localhost:3000/products") //fetch ile bir api ye ulaşılabilir.
-    .then(response=>response.json()) //gelen response için response u json a döndür.
-    .then(data=>this.setState({products:data}));;
+  getProducts = (categoryId) => {
+
+    let url = "http://localhost:3000/products";
+    if (categoryId) { //seoUrl varsa anlamına gelir.(Defined)
+      url += "?categoryId=" + categoryId; //Bu url'in sonuna ? ekle ve sonra categoryId i ekle demek yani url yi değiştirmiş olduk..
+    }
+
+
+
+    fetch(url) //fetch ile bir api ye ulaşılabilir.
+      .then(response => response.json()) //gelen response için response u json a döndür.
+      .then(data => this.setState({ products: data }));;
   };
 
   render() {
-    let productInfo = { title: "Product List" } ;//bu da bir başka yazım şekli
+    let productInfo = { title: "Product List" };//bu da bir başka yazım şekli
     let categoryInfo = { title: "CatagoryList" };
     return (
       // jsx yapısı ; 

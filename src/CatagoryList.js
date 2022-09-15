@@ -32,7 +32,7 @@ export default class CatagoryList extends Component {
             //setstate statedeki herhangi bir nesnenin eğiştirlmesini sağlar
           }
         </ListGroup>
-        <h4>{this.props.currentCategory}</h4>
+        {/* <h4>{this.props.currentCategory}</h4> */}
       </div>
     )
   }
