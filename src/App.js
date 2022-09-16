@@ -6,12 +6,12 @@ import "bootstrap/dist/css/bootstrap.min.css"
 import React, { Component } from 'react'
 //import { Container, Row } from 'react-bootstrap';
 import { Container, Row, Col } from "reactstrap";
-import { toHaveDisplayValue } from '@testing-library/jest-dom/dist/matchers';
+//import { toHaveDisplayValue } from '@testing-library/jest-dom/dist/matchers';
 
 
 export default class App extends Component {
 
-  state = { currentCategory: "", products: [] }
+  state = { currentCategory: "", products: [], cart:[] ,}
 
   componentDidMount() { //component yerleşti
     this.getProducts();
@@ -41,6 +41,22 @@ export default class App extends Component {
       .then(data => this.setState({ products: data }));;
   };
 
+  addToCart = (product) => {
+
+    let newCart = this.state.cart;
+    var addedItem = newCart.find(c => c.product.id === product.id);
+    if (addedItem) {
+      addedItem.quantity += 1;
+    }
+    else {
+      newCart.push({ product:product,quantity: 1 })
+    }
+
+    this.setState({cart:newCart});
+
+
+  }
+
   render() {
     let productInfo = { title: "Product List" };//bu da bir başka yazım şekli
     let categoryInfo = { title: "CatagoryList" };
@@ -48,16 +64,15 @@ export default class App extends Component {
       // jsx yapısı ; 
       <div>
         <Container>
-
-          <Row>
-            <Navi> </Navi>
-          </Row>
-
+          <Navi cart={this.state.cart}> 
+          
+          
+          </Navi>
           <Row>
             <Col xs="3"><CatagoryList currentCategory={this.state.currentCategory} changeCategory={this.changeCategory} info={categoryInfo}></CatagoryList></Col>
-            <Col xs="9"> <ProductList products={this.state.products} currentCategory={this.state.currentCategory} info={productInfo}></ProductList></Col>
+            <Col xs="9"> <ProductList products={this.state.products} addToCart={this.addToCart} currentCategory={this.state.currentCategory} info={productInfo}></ProductList></Col>
           </Row>
-
+          
         </Container>
         {/* <h2>Hello from react </h2>
       <h3>Deneme</h3>  */}

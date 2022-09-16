@@ -1,13 +1,42 @@
-import React, { Component } from 'react'
+import React, { useState } from 'react';
+import {
+  Collapse,
+  Navbar,
+  NavbarToggler,
+  NavbarBrand,
+  Nav,
+  NavItem,
+  NavLink,
+} from 'reactstrap';
 
-export default class Navi extends Component {
-  render() { //render componenti tekrardan çalıştıryor değişen veri olduğunda
-    return (
-      <div>
-        <h2>Navi</h2>
-        
-      </div>
-    )
-  }
+function Navi(props) {
+  const [collapsed, setCollapsed] = useState(true);
+
+  const toggleNavbar = () => setCollapsed(!collapsed);
+
+  return (
+    <div>
+      <Navbar color="faded" light>
+        <NavbarBrand href="/" className="me-auto">
+          My First App 
+        </NavbarBrand>
+        <NavbarToggler onClick={toggleNavbar} className="me-2" />
+        <Collapse isOpen={!collapsed} navbar>
+          <Nav navbar>
+            <NavItem>
+              <NavLink href="/components/">Components-    </NavLink>
+              {/* {this.props.cart.length} */}
+            </NavItem>
+            <NavItem>
+              <NavLink href="https://github.com/reactstrap/reactstrap">
+                GitHub
+              </NavLink>
+            </NavItem>
+          </Nav>
+        </Collapse>
+      </Navbar>
+    </div>
+  );
 }
 
+export default Navi;

@@ -24,10 +24,14 @@ export default class CatagoryList extends Component {
         <h3>{this.props.info.title}</h3>
         <h3>{this.state.counter}</h3>
         {/* süslü parantez js kodu başlatmak için kullanılır */}
-        <ListGroup>
+        <ListGroup >
           {
             this.state.categories.map(category => (
-              <ListGroupItem onClick={() => this.props.changeCategory(category)} key={category.id}>{category.categoryName}</ListGroupItem>
+              //active mavi renk yapar kategorileri
+              //mevcut kategorinin adı current kategoriye eşitse active true olacak(mavi) değilse false olacak(default:beyaz)
+              <ListGroupItem active={category.categoryName===this.props.currentCategory?true:false} onClick={() => this.props.changeCategory(category)} key={category.id}>
+                {category.categoryName}
+                </ListGroupItem>
             ))
             //setstate statedeki herhangi bir nesnenin eğiştirlmesini sağlar
           }
