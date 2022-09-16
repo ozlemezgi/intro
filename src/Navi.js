@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
   Collapse,
   Navbar,
@@ -7,36 +7,74 @@ import {
   Nav,
   NavItem,
   NavLink,
+  UncontrolledDropdown,
+  DropdownToggle,
+  DropdownMenu,
+  DropdownItem,
 } from 'reactstrap';
 
-function Navi(props) {
-  const [collapsed, setCollapsed] = useState(true);
+export default class Navi extends React.Component{
+  constructor(props){
+    super(props);
 
-  const toggleNavbar = () => setCollapsed(!collapsed);
+    this.toggle = this.toggle.bind(this);
+    this.state={
+      isOpen: false
 
-  return (
-    <div>
-      <Navbar color="faded" light>
-        <NavbarBrand href="/" className="me-auto">
-          My First App 
-        </NavbarBrand>
-        <NavbarToggler onClick={toggleNavbar} className="me-2" />
-        <Collapse isOpen={!collapsed} navbar>
-          <Nav navbar>
-            <NavItem>
-              <NavLink href="/components/">Components-    </NavLink>
-              {/* {this.props.cart.length} */}
-            </NavItem>
-            <NavItem>
-              <NavLink href="https://github.com/reactstrap/reactstrap">
-                GitHub
-              </NavLink>
-            </NavItem>
-          </Nav>
-        </Collapse>
-      </Navbar>
-    </div>
-  );
+    };
+  }
+  toggle(){
+    this.setState({
+      isOpen :!this.state.isOpen
+    });
+  }
+
+  render(){
+    return(
+      <div>
+        <Navbar color="light" light expand="md">
+          <NavbarBrand href="/">Hey {this.props.cart.length}</NavbarBrand>
+          <NavbarToggler> onClick={this.toggle}
+          <Collapse isOpen={this.state.isOpen} navbar>
+            <Nav className='ml-auto' navbar>
+              <NavItem>
+                <NavLink href="components">Components</NavLink>
+              </NavItem>
+              <NavItem>
+                <NavLink href="components">Componentsss</NavLink>
+              </NavItem>
+              <UncontrolledDropdown nav inNavbar>
+                <DropdownToggle nav caret>
+                  Options
+                </DropdownToggle>
+                <DropdownMenu right>
+                  <DropdownItem>
+                    Option 1
+                  </DropdownItem>
+                  <DropdownItem>
+                    Option 1
+                  </DropdownItem>
+                  <DropdownItem divider> 
+                  </DropdownItem>
+                  <DropdownItem>
+                    Reset
+                  </DropdownItem>
+                </DropdownMenu>
+              </UncontrolledDropdown>
+
+
+            </Nav>
+
+
+          </Collapse>
+          </NavbarToggler>
+        </Navbar>
+      </div>
+    );
+  }
+
 }
 
-export default Navi;
+  
+              {/* {this.props.cart.length} */}
+ 
