@@ -45,7 +45,7 @@ export default class Navi extends React.Component{
           Your Cart
         </DropdownToggle>
         <DropdownMenu right>
-            { this.props.cart.map(cartItem => ( <DropdownItem key={cartItem.product.id}> {cartItem.product.productName} 
+            { this.props.cart.map(cartItem => ( <DropdownItem key={cartItem.product.id}> <Badge color="danger" onClick={()=>this.props.removeFromCart(cartItem.product)}> x </Badge>{cartItem.product.productName} 
             <Badge color="success">{cartItem.quantity}</Badge>
             </DropdownItem>)) }
          

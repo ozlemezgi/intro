@@ -57,6 +57,12 @@ export default class App extends Component {
 
   }
 
+  removeFromCart =(product)=>{
+    let newCart =this.state.cart.filter(c=>c.product.id!==product.id)
+    this.setState({cart:newCart})
+
+  }
+
   render() {
     let productInfo = { title: "Product List" };//bu da bir başka yazım şekli
     let categoryInfo = { title: "CatagoryList" };
@@ -64,7 +70,7 @@ export default class App extends Component {
       // jsx yapısı ; 
       <div>
         <Container>
-          <Navi cart={this.state.cart}> 
+          <Navi removeFromCart={this.removeFromCart} cart={this.state.cart}> 
           
           
           </Navi>
