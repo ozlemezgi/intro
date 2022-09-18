@@ -6,12 +6,17 @@ import "bootstrap/dist/css/bootstrap.min.css"
 import React, { Component } from 'react'
 //import { Container, Row } from 'react-bootstrap';
 import { Container, Row, Col } from "reactstrap";
+import { Route } from 'react-router-dom';
 //import { toHaveDisplayValue } from '@testing-library/jest-dom/dist/matchers';
+import { Switch } from 'react-router-dom';
+import NotFound from './NotFound';
+import CartList from './CartList';
+
 
 
 export default class App extends Component {
 
-  state = { currentCategory: "", products: [], cart:[] ,}
+  state = { currentCategory: "", products: [], cart: [], }
 
   componentDidMount() { //component yerleşti
     this.getProducts();
@@ -49,17 +54,17 @@ export default class App extends Component {
       addedItem.quantity += 1;
     }
     else {
-      newCart.push({ product:product,quantity: 1 })
+      newCart.push({ product: product, quantity: 1 })
     }
 
-    this.setState({cart:newCart});
+    this.setState({ cart: newCart });
 
 
   }
 
-  removeFromCart =(product)=>{
-    let newCart =this.state.cart.filter(c=>c.product.id!==product.id)
-    this.setState({cart:newCart})
+  removeFromCart = (product) => {
+    let newCart = this.state.cart.filter(c => c.product.id !== product.id)
+    this.setState({ cart: newCart })
 
   }
 
@@ -70,15 +75,35 @@ export default class App extends Component {
       // jsx yapısı ; 
       <div>
         <Container>
-          <Navi removeFromCart={this.removeFromCart} cart={this.state.cart}> 
-          
-          
+          <Navi removeFromCart={this.removeFromCart} cart={this.state.cart}>
+
+
           </Navi>
           <Row>
             <Col xs="3"><CatagoryList currentCategory={this.state.currentCategory} changeCategory={this.changeCategory} info={categoryInfo}></CatagoryList></Col>
-            <Col xs="9"> <ProductList products={this.state.products} addToCart={this.addToCart} currentCategory={this.state.currentCategory} info={productInfo}></ProductList></Col>
+            <Col xs="9">
+              <Switch>
+                {/* Switch sırası ile route ları gezmemizi sağlıyor */}
+                <Route exact path="/" render={props => (
+                  <ProductList {...props} products={this.state.products} addToCart={this.addToCart} currentCategory={this.state.currentCategory} info={productInfo}></ProductList>
+                )
+
+                }></Route>
+                <Route exact path="/cart" component={CartList}></Route>
+                <Route component={NotFound}></Route>
+                {/* componentin değişmesini istediğimiz yer */}
+
+              </Switch>
+
+
+
+
+            </Col>
+
+
+
           </Row>
-          
+
         </Container>
         {/* <h2>Hello from react </h2>
       <h3>Deneme</h3>  */}
