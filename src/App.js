@@ -89,7 +89,14 @@ export default class App extends Component {
                 )
 
                 }></Route>
-                <Route exact path="/cart" component={CartList}></Route>
+                <Route exact path="/cart"  render={props => (
+                  <CartList {...props} 
+                  cart={this.state.cart} 
+                  removeFromCart={this.removeFromCart}>
+                  </CartList>
+                )
+
+                }></Route>
                 <Route component={NotFound}></Route>
                 {/* componentin değişmesini istediğimiz yer */}
 

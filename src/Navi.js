@@ -13,7 +13,9 @@ import {
   DropdownItem,
   Badge,
 
+
 } from 'reactstrap';
+import { Link } from 'react-router-dom';
 
 
 export default class Navi extends React.Component{
@@ -44,6 +46,7 @@ export default class Navi extends React.Component{
         <DropdownToggle nav caret>
           Your Cart
         </DropdownToggle>
+    
         <DropdownMenu right>
             { this.props.cart.map(cartItem => ( <DropdownItem key={cartItem.product.id}> <Badge color="danger" onClick={()=>this.props.removeFromCart(cartItem.product)}> x </Badge>{cartItem.product.productName} 
             <Badge color="success">{cartItem.quantity}</Badge>
@@ -52,7 +55,7 @@ export default class Navi extends React.Component{
           <DropdownItem divider> 
           </DropdownItem>
           <DropdownItem>
-            Reset
+            <Link to="cart">Go to Cart</Link>
           </DropdownItem>
         </DropdownMenu>
       </UncontrolledDropdown>
