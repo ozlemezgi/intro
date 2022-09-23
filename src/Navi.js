@@ -42,6 +42,9 @@ export default class Navi extends React.Component{
       <div>
         <Navbar color="light" light expand="md">
           <NavbarBrand href="/">Sepetinizde  {this.props.cart.length} çeşit ürün bulunmaktadır</NavbarBrand>
+          <NavItem>
+                <Link to ="form1">Form Demo 1</Link>
+              </NavItem>
           <UncontrolledDropdown nav inNavbar>
         <DropdownToggle nav caret>
           Your Cart
@@ -57,6 +60,7 @@ export default class Navi extends React.Component{
           <DropdownItem>
             <Link to="cart">Go to Cart</Link>
           </DropdownItem>
+          
         </DropdownMenu>
       </UncontrolledDropdown>
           <NavbarToggler> onClick={this.toggle}

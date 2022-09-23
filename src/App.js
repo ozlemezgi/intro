@@ -8,9 +8,10 @@ import React, { Component } from 'react'
 import { Container, Row, Col } from "reactstrap";
 import { Route } from 'react-router-dom';
 //import { toHaveDisplayValue } from '@testing-library/jest-dom/dist/matchers';
-import { Switch } from 'react-router-dom';
+import { Switch , withRouter} from 'react-router-dom';
 import NotFound from './NotFound';
 import CartList from './CartList';
+import FormDemo1 from './FormDemo1';
 
 
 
@@ -89,14 +90,17 @@ export default class App extends Component {
                 )
 
                 }></Route>
-                <Route exact path="/cart"  render={props => (
+                <Route exact path="/cart"
+                render={props => (
                   <CartList {...props} 
                   cart={this.state.cart} 
                   removeFromCart={this.removeFromCart}>
                   </CartList>
-                )
+                )}>
+                </Route>
 
-                }></Route>
+                <Route path="/form1" componenet={FormDemo1}></Route>
+
                 <Route component={NotFound}></Route>
                 {/* componentin değişmesini istediğimiz yer */}
 
